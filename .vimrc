@@ -4,6 +4,60 @@
 
 " It will be prepended with https://github.com/amix/vimrc/tree/master/vimrcs (basic.vim extended.vim)
 
+" Uncomment the next line to make Vim more Vi-compatible
+" NOTE: debian.vim sets 'nocompatible'. Setting 'compatible' changes numerous
+" options, so any other options should be set AFTER setting 'compatible'.
+set nocompatible
+set backspace=indent,eol,start " backspace over everything in insert mode
+
+if has("syntax")
+	syntax on
+endif
+
+" If using a dark background within the editing area and syntax highlighting
+" turn on this option as well
+set background=dark
+
+" detect file type
+filetype on
+filetype plugin on
+
+" Automatically write content back to the file.
+" If file is written, on :next, :rewind, :last,
+" :first, :previous, :stop, :suspend, :tag, :!
+" :make, CTRL-] or CTRL- command execution, files will be written
+set autowrite
+
+set autoindent " Auto-indent, use the same indent with the line above
+
+set tabstop=3
+set softtabstop=3
+set shiftwidth=3
+set cindent
+set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
+set showmatch
+set linebreak
+set whichwrap=b,s,<,>,[,]
+set mouse=            " Disable mouse usage (all modes)
+set previewwindow
+set history=50        " set command history to 50
+
+set laststatus=2
+set ruler
+
+"--cmd line setting--
+set showcmd
+set showmode
+
+"--find setting--
+set incsearch
+set hlsearch
+
+" Quick mapping for ESC
+imap jj <ESC>
+
+" load man.vim
+runtime! ftplugin/man.vim
 
 """"""""""""""""""""""""""""""
 " => bufExplorer plugin
@@ -135,7 +189,7 @@ nnoremap <Leader>, :bp<CR>
 " => color and theme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark
-colorscheme solarized
+colorscheme ron
 set relativenumber
 set number
 
