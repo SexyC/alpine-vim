@@ -1,0 +1,30 @@
+FROM jare/vim-bundle
+
+# User config
+ENV UID="1000" \
+    UNAME="developer" \
+    GID="1000" \
+    GNAME="developer" \
+    SHELL="/bin/bash" \
+    UHOME=/home/developer
+
+COPY .vimrc $UHOME/my.vimrc
+COPY .bashrc $UHOME/.bashrc
+
+# Build default .vimrc
+RUN  curl -s \
+     https://raw.githubusercontent.com/amix/vimrc/master/vimrcs/basic.vim \
+     >> $UHOME/.vimrc~ \
+     && curl -s \
+     https://raw.githubusercontent.com/amix/vimrc/master/vimrcs/extended.vim \
+     >> $UHOME/.vimrc~ \
+     && cat  $UHOME/my.vimrc \
+     >> $UHOME/.vimrc~ \
+     && rm $UHOME/my.vimrc \
+     && sed -i '/colorscheme peaksea/d' $UHOME/.vimrc~
+
+# List of Vim plugins to disable
+ENV DISABLE=""
+
+ENTRYPOINT ["sh", "/usr/local/bin/run"]
+
